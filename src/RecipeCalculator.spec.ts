@@ -8,7 +8,8 @@ import {
 import {
 	ingredients,
 	chocolatePaste,
-	chocolateBatter
+	chocolateBatter,
+	chocolateCake
 } from "./constants/testConstants";
 
 describe("calculateCostPerUnit", () => {
@@ -23,6 +24,11 @@ describe("calculateCostPerUnit", () => {
 
 	it('should return cost per unit of composite ingredient which has recipe made with composite ingredient', () => {
 		expect(calculateCostPerUnit(chocolateBatter)).toBe(26.88);
+	});
+
+	it('should return cost per unit of product which has recipe made with composite ingredient', () => {
+		const cost = 10.77 + 20.68;
+		expect(calculateCostPerUnit(chocolateCake)).toBe(cost);
 	});
 });
 

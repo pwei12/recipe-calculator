@@ -97,3 +97,29 @@ export const chocolateBatter = {
 		]
 	}
 };
+
+export const chocolateCake = {
+	id: "choc-cake",
+	name: "Chocolate Cake",
+	weight: 1400,
+	cost: null,
+	recipe: {
+		id: "1",
+		madeWith: [
+			{
+				id: "1",
+				pos: 0,
+				amt: 1000,
+				qty: 1,
+				ingredient: chocolatePaste,
+			},
+			{
+				id: "2",
+				pos: 0,
+				amt: 1000,
+				qty: 1,
+				ingredient: chocolateBatter,
+			}
+		]
+	}
+}
