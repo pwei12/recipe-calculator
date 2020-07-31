@@ -3,9 +3,13 @@ import {
 	calculateCostPerKg,
 	calculateMeta,
 	calculateCostPerUnitOfConstituent,
-	calculateCostPerUnitOfRecipe,
+	calculateCostPerUnitOfRecipe
 } from "./RecipeCalculator";
-import { ingredients, chocolatePaste } from "./constants/testConstants";
+import {
+	ingredients,
+	chocolatePaste,
+	chocolateBatter
+} from "./constants/testConstants";
 
 describe("calculateCostPerUnit", () => {
 	it("should return cost of raw ingredient as cost per unit", () => {
@@ -13,9 +17,13 @@ describe("calculateCostPerUnit", () => {
 		expect(calculateCostPerUnit(chocolate)).toBe(10);
 	});
 
-	it("should return total cost per unit of composite ingredient whose recipe is made with raw ingredients only", () => {
+	it("should return total cost per unit of composite ingredient which has recipe made with raw ingredients only", () => {
 		expect(calculateCostPerUnit(chocolatePaste)).toBe(14);
 	});
+
+	it('should return cost per unit of composite ingredient which has recipe made with composite ingredient', () => {
+		expect(calculateCostPerUnit(chocolateBatter)).toBe(26.88);
+	  });
 });
 
 describe("calculateCostPerKg", () => {
@@ -97,4 +105,42 @@ describe("calculateCostPerUnitOfRecipe", () => {
 		};
 		expect(calculateCostPerUnitOfRecipe(recipe)).toBe(14);
 	});
+
+		
+	// it.only("should return cost per unit of a recipe which is made with composite ingredient and raw ingredient", () => {
+	// 	const recipe = {
+	// 		id: '2',
+	// 		madeWith: [
+	// 		  {
+	// 			id: '1',
+	// 			pos: 0,
+	// 			amt: 2000,
+	// 			qty: 1,
+	// 			ingredient: chocolatePaste
+	// 		  },
+	// 		  {
+	// 			id: '2',
+	// 			pos: 0,
+	// 			amt: 1000,
+	// 			qty: 1,
+	// 			ingredient: ingredients[1]
+	// 		  },
+	// 		  {
+	// 			id: '3',
+	// 			pos: 0,
+	// 			amt: 500,
+	// 			qty: 1,
+	// 			ingredient: ingredients[2]
+	// 		  },
+	// 		  {
+	// 			id: '4',
+	// 			pos: 0,
+	// 			amt: 10,
+	// 			qty: 1,
+	// 			ingredient: ingredients[3]
+	// 		  },
+	// 		]
+	// 	  };
+	// 	  expect(calculateCostPerUnitOfRecipe(recipe)).toBe(21.54);
+	// });
 });
