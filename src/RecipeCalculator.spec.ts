@@ -36,6 +36,17 @@ describe("calculateCostPerUnit", () => {
 		};
 		expect(calculateCostPerUnitOfConstituent(constituent.amt, constituent.ingredient)).toBe(6);
 	});
+
+	it("should return cost per unit of a recipe's constituent in two decimal places", () => {
+		const constituent = {
+			id: "3",
+			pos: 2,
+			amt: 800,
+			qty: 1,
+			ingredient: ingredients[1],
+		};
+		expect(calculateCostPerUnitOfConstituent(constituent.amt, constituent.ingredient)).toBe(5.34);
+	});
 });
 
 describe("calculateCostPerKg", () => {

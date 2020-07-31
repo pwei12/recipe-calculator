@@ -22,7 +22,8 @@ const calculateMeta = (ingredient: Ingredient) => {
 };
 
 const calculateCostPerUnitOfConstituent = (amount, {cost, weight}) => {
-	return calculateCostPerKg(cost, weight) * (amount / GRAMS_PER_KILOGRAMS);
+	const costPerUnit =calculateCostPerKg(cost, weight) * (amount / GRAMS_PER_KILOGRAMS);
+	return formatDecimalPlaces(costPerUnit, TWO_DECIMAL_PLACES);
 };
 
 export {
