@@ -1,4 +1,8 @@
-import { calculateCostPerUnit, calculateCostPerKg } from "./RecipeCalculator";
+import {
+    calculateCostPerUnit,
+    calculateCostPerKg,
+    calculateMeta
+} from "./RecipeCalculator";
 
 const ingredients = [
 	{
@@ -32,4 +36,12 @@ describe("calculateCostPerKg", () => {
 		const sugar = ingredients[1];
 		expect(calculateCostPerKg(sugar.cost, sugar.weight)).toBe(6.67);
 	});
+});
+
+describe('calculateMeta', () => {
+    it('should return meta of a raw ingredient with properties cost, weigth and cosPerKg', () => {
+        const sugar = ingredients[1];
+        const sugarMeta = { cost: sugar.cost, weight: sugar.weight, costPerKg: 6.67 };
+		expect(calculateMeta(sugar)).toEqual(sugarMeta);
+    });
 });
