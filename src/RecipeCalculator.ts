@@ -6,8 +6,12 @@ interface Ingredient {
 	cost: number;
 }
 
-const calculateCostPerUnit = ({ cost }: Ingredient) => {
-	return cost;
+const calculateCostPerUnit = ({ cost, recipe }: Ingredient) => {
+	let unitCost = cost;
+	if (cost === null) {
+		unitCost = calculateCostPerUnitOfRecipe(recipe);
+	}
+	return unitCost;
 };
 
 const calculateCostPerKg = (cost: number, weight: number) => {
