@@ -21,14 +21,22 @@ const calculateMeta = (ingredient: Ingredient) => {
 	return { cost, weight, costPerKg: calculateCostPerKg(cost, weight) };
 };
 
-const calculateCostPerUnitOfConstituent = (amount, {cost, weight}) => {
-	const costPerUnit =calculateCostPerKg(cost, weight) * (amount / GRAMS_PER_KILOGRAMS);
+const calculateCostPerUnitOfConstituent = (amount, { cost, weight }) => {
+	const costPerUnit = calculateCostPerKg(cost, weight) * (amount / GRAMS_PER_KILOGRAMS);
 	return formatDecimalPlaces(costPerUnit, TWO_DECIMAL_PLACES);
 };
 
+const calculateCostPerUnitOfRecipe = (recipe) => {
+	return recipe.madeWith.reduce(
+		(total, { amt, ingredient }) => total + calculateCostPerUnitOfConstituent(amt, ingredient),
+		0
+	);
+};
+
 export {
-    calculateCostPerUnit,
-    calculateCostPerKg,
+	calculateCostPerUnit,
+	calculateCostPerKg,
 	calculateMeta,
-	calculateCostPerUnitOfConstituent
+	calculateCostPerUnitOfConstituent,
+	calculateCostPerUnitOfRecipe,
 };
