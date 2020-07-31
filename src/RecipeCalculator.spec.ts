@@ -1,7 +1,8 @@
 import {
-    calculateCostPerUnit,
-    calculateCostPerKg,
-    calculateMeta
+	calculateCostPerUnit,
+	calculateCostPerKg,
+	calculateMeta,
+	calculateCostPerUnitOfConstituent
 } from "./RecipeCalculator";
 
 const ingredients = [
@@ -24,6 +25,17 @@ describe("calculateCostPerUnit", () => {
 		const chocolate = ingredients[0];
 		expect(calculateCostPerUnit(chocolate)).toBe(10);
 	});
+
+	it("should return cost per unit of a recipe's constituent whose ingredient is raw ingredient", () => {
+		const constituent = {
+			id: "3",
+			pos: 2,
+			amt: 600,
+			qty: 1,
+			ingredient: ingredients[0],
+		};
+		expect(calculateCostPerUnitOfConstituent(constituent.amt, constituent.ingredient)).toBe(6);
+	});
 });
 
 describe("calculateCostPerKg", () => {
@@ -38,10 +50,10 @@ describe("calculateCostPerKg", () => {
 	});
 });
 
-describe('calculateMeta', () => {
-    it('should return meta of a raw ingredient with properties cost, weigth and cosPerKg', () => {
-        const sugar = ingredients[1];
-        const sugarMeta = { cost: sugar.cost, weight: sugar.weight, costPerKg: 6.67 };
+describe("calculateMeta", () => {
+	it("should return meta of a raw ingredient with properties cost, weigth and cosPerKg", () => {
+		const sugar = ingredients[1];
+		const sugarMeta = { cost: sugar.cost, weight: sugar.weight, costPerKg: 6.67 };
 		expect(calculateMeta(sugar)).toEqual(sugarMeta);
-    });
+	});
 });
