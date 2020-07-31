@@ -1,5 +1,5 @@
-import { formatDecimalPlaces } from "./utils/utils";
-import { GRAMS_PER_KILOGRAMS, TWO_DECIMAL_PLACES } from "./constants/constants";
+import { formatDecimalPlaces, isNotRawIngredient } from "./utils/utils";
+import { GRAMS_PER_KILOGRAMS, TWO_DECIMAL_PLACES, INITIAL_COST } from "./constants/constants";
 
 interface MadeWith {
 	pos: number;
@@ -20,7 +20,7 @@ interface Ingredient {
 
 const calculateCostPerUnit = ({ cost, recipe }: Ingredient) => {
 	let unitCost = cost;
-	if (cost === null) {
+	if (isNotRawIngredient(cost)) {
 		unitCost = calculateCostPerUnitOfRecipe(recipe);
 	}
 	return unitCost;
@@ -43,10 +43,12 @@ const calculateCostPerUnitOfConstituent = (amount, { cost, weight }) => {
 };
 
 const calculateCostPerUnitOfRecipe = (recipe) => {
-	return recipe.madeWith.reduce(
-		(total, { amt, ingredient }) => total + calculateCostPerUnitOfConstituent(amt, ingredient),
-		0
-	);
+	return recipe.madeWith.reduce((total, { amt, ingredient }) => {
+		if (isNotRawIngredient(ingredient.cost)) {
+			ingredient.cost = calculateCostPerUnitOfRecipe(ingredient.recipe);
+		}
+		return total + calculateCostPerUnitOfConstituent(amt, ingredient);
+	}, INITIAL_COST);
 };
 
 export {

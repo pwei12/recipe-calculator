@@ -17,6 +17,12 @@ export const ingredients = [
 		weight: 1500,
 		cost: 10,
 	},
+	{
+		id: "4",
+		name: "Egg",
+		weight: 50,
+		cost: 10,
+	},
 ];
 
 export const chocolatePaste = {
@@ -47,6 +53,46 @@ export const chocolatePaste = {
 				amt: 600,
 				qty: 1,
 				ingredient: ingredients[2],
+			}
+		]
+	}
+};
+
+export const chocolateBatter = {
+	id: "choc-batter",
+	name: "Chocolate Batter",
+	weight: 1300,
+	cost: null,
+	recipe: {
+		id: "2",
+		madeWith: [
+			{
+				id: "1",
+				pos: 0,
+				amt: 2000,
+				qty: 1,
+				ingredient: chocolatePaste,
+			},
+			{
+				id: "2",
+				pos: 0,
+				amt: 1000,
+				qty: 1,
+				ingredient: ingredients[1],
+			},
+			{
+				id: "3",
+				pos: 0,
+				amt: 500,
+				qty: 1,
+				ingredient: ingredients[2],
+			},
+			{
+				id: "4",
+				pos: 0,
+				amt: 10,
+				qty: 1,
+				ingredient: ingredients[3],
 			}
 		]
 	}
