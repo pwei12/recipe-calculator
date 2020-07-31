@@ -1,9 +1,21 @@
 import { formatDecimalPlaces } from "./utils/utils";
 import { GRAMS_PER_KILOGRAMS, TWO_DECIMAL_PLACES } from "./constants/constants";
 
+interface MadeWith {
+	pos: number;
+	amt: number;
+	qty: number;
+	ingredient: Ingredient;
+}
+
+interface Recipe {
+	madeWith: MadeWith[];
+}
+
 interface Ingredient {
 	weight: number;
 	cost: number;
+	recipe?: Recipe;
 }
 
 const calculateCostPerUnit = ({ cost, recipe }: Ingredient) => {
