@@ -23,7 +23,7 @@ describe("calculateCostPerUnit", () => {
 
 	it('should return cost per unit of composite ingredient which has recipe made with composite ingredient', () => {
 		expect(calculateCostPerUnit(chocolateBatter)).toBe(26.88);
-	  });
+	});
 });
 
 describe("calculateCostPerKg", () => {
@@ -48,6 +48,11 @@ describe("calculateMeta", () => {
 	it("should return meta of composite ingredient which has recipe made with raw ingredients only", () => {
 		const meta = { cost: 14, weight: chocolatePaste.weight, costPerKg: 10.77 };
 		expect(calculateMeta(chocolatePaste)).toEqual(meta);
+	});
+
+	it("should return meta of composite ingredient which has recipe made with raw ingredients and composite ingredient", () => {
+		const meta = { cost: 26.88, weight: chocolateBatter.weight, costPerKg: 20.68 };
+		expect(calculateMeta(chocolateBatter)).toEqual(meta);
 	});
 });
 
@@ -105,42 +110,4 @@ describe("calculateCostPerUnitOfRecipe", () => {
 		};
 		expect(calculateCostPerUnitOfRecipe(recipe)).toBe(14);
 	});
-
-		
-	// it.only("should return cost per unit of a recipe which is made with composite ingredient and raw ingredient", () => {
-	// 	const recipe = {
-	// 		id: '2',
-	// 		madeWith: [
-	// 		  {
-	// 			id: '1',
-	// 			pos: 0,
-	// 			amt: 2000,
-	// 			qty: 1,
-	// 			ingredient: chocolatePaste
-	// 		  },
-	// 		  {
-	// 			id: '2',
-	// 			pos: 0,
-	// 			amt: 1000,
-	// 			qty: 1,
-	// 			ingredient: ingredients[1]
-	// 		  },
-	// 		  {
-	// 			id: '3',
-	// 			pos: 0,
-	// 			amt: 500,
-	// 			qty: 1,
-	// 			ingredient: ingredients[2]
-	// 		  },
-	// 		  {
-	// 			id: '4',
-	// 			pos: 0,
-	// 			amt: 10,
-	// 			qty: 1,
-	// 			ingredient: ingredients[3]
-	// 		  },
-	// 		]
-	// 	  };
-	// 	  expect(calculateCostPerUnitOfRecipe(recipe)).toBe(21.54);
-	// });
 });
