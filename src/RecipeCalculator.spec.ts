@@ -15,18 +15,18 @@ import {
 describe("calculateCostPerUnit", () => {
 	it("should return cost of raw ingredient as cost per unit", () => {
 		const chocolate = ingredients[0];
-		expect(calculateCostPerUnit(chocolate)).toBe(10);
+		expect(calculateCostPerUnit(chocolate)).toBe(chocolate.cost);
 	});
 
 	it("should return total cost per unit of composite ingredient which has recipe made with raw ingredients only", () => {
 		expect(calculateCostPerUnit(chocolatePaste)).toBe(14);
 	});
 
-	it('should return cost per unit of composite ingredient which has recipe made with composite ingredient', () => {
+	it("should return cost per unit of composite ingredient which has recipe made with composite ingredient", () => {
 		expect(calculateCostPerUnit(chocolateBatter)).toBe(26.88);
 	});
 
-	it('should return cost per unit of product which has recipe made with composite ingredient', () => {
+	it("should return cost per unit of product which has recipe made with composite ingredient", () => {
 		const cost = 10.77 + 20.68;
 		expect(calculateCostPerUnit(chocolateCake)).toBe(cost);
 	});
@@ -59,6 +59,11 @@ describe("calculateMeta", () => {
 	it("should return meta of composite ingredient which has recipe made with raw ingredients and composite ingredient", () => {
 		const meta = { cost: 26.88, weight: chocolateBatter.weight, costPerKg: 20.68 };
 		expect(calculateMeta(chocolateBatter)).toEqual(meta);
+	});
+
+	it("should return meta of chocolate cake which has recipe made with composite ingredient", () => {
+		const meta = { cost: 31.45, weight: chocolateCake.weight, costPerKg: 22.46 };
+		expect(calculateMeta(chocolateCake)).toEqual(meta);
 	});
 });
 
