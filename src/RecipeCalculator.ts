@@ -21,8 +21,13 @@ const calculateMeta = (ingredient: Ingredient) => {
 	return { cost, weight, costPerKg: calculateCostPerKg(cost, weight) };
 };
 
+const calculateCostPerUnitOfConstituent = (amount, {cost, weight}) => {
+	return calculateCostPerKg(cost, weight) * (amount / GRAMS_PER_KILOGRAMS);
+};
+
 export {
     calculateCostPerUnit,
     calculateCostPerKg,
-    calculateMeta
+	calculateMeta,
+	calculateCostPerUnitOfConstituent
 };
