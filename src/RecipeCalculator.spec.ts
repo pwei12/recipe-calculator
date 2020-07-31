@@ -32,6 +32,42 @@ describe("calculateCostPerUnit", () => {
 		const chocolate = ingredients[0];
 		expect(calculateCostPerUnit(chocolate)).toBe(10);
 	});
+
+	it("should return total cost per unit of composite ingredient whose recipe is made with raw ingredients only", () => {
+		const chocolatePaste = {
+			id: "choc-paste",
+			name: "Chocolate Paste",
+			weight: 1300,
+			cost: null,
+			recipe: {
+				id: "1",
+				madeWith: [
+					{
+						id: "1",
+						pos: 0,
+						amt: 1000,
+						qty: 1,
+						ingredient: ingredients[0],
+					},
+					{
+						id: "2",
+						pos: 1,
+						amt: 1000,
+						qty: 1,
+						ingredient: ingredients[1],
+					},
+					{
+						id: "2",
+						pos: 2,
+						amt: 600,
+						qty: 1,
+						ingredient: ingredients[2],
+					}
+				]
+			}
+		};
+		expect(calculateCostPerUnit(chocolatePaste)).toBe(14);
+	});
 });
 
 describe("calculateCostPerKg", () => {
