@@ -1,5 +1,5 @@
 # recipe-calculator
-<br />
+
 ## Description
 
 The purpose of this app is to calculate the total cost, total weight, and cost per kg of a product.
@@ -30,106 +30,109 @@ Funtion calculateMeta returns meta info (cost per unit, weight and cost per kg) 
 
 Ingredient can be raw ingredient or composite ingredient, which is created by other ingredients.
 
-### Sample of data structure of a raw ingredient:
-/**
- * @param id is unique id of an ingredient
- * @param name is the name of the ingredient
- * @param weight is the weight, in grams, per unit of ingredient
- * @param cost is the total cost in $, per unit of the ingredient
- */
-const chocolate = {
-  id: 'choc',
-  name: 'Chocolate',
-  weight: 1300,
-  cost: 14,
+### Data structure sample of a raw ingredient:
+/** <br />
+ \* @param id is unique id of an ingredient <br />
+ \* @param name is the name of the ingredient <br />
+ \* @param weight is the weight, in grams, per unit of ingredient <br />
+ \* @param cost is the total cost in $, per unit of the ingredient <br />
+**/
+<br />
+const chocolate = {  <br />
+  id: 'choc',  <br />
+  name: 'Chocolate',  <br />
+  weight: 1300,  <br />
+  cost: 14, <br />
 }
 
-### Sample of data structure of a composite ingredient created by other raw ingredients:
-/**
- * @param id is unique id of an ingredient
- * @param name is the name of the ingredient
- * @param weight is the weight, in grams, per unit of ingredient
- * @param cost is the total cost in $, per unit of the ingredient. It is null and it's value needs to be determined by calculating the cost of its constituents
- * @param recipe refers to the fact that it is a "composite ingredient", not a "raw ingredient"
- * @param madeWith refers to the ingredients with which constitutes this recipe, and the respective amounts utillised in the recipe
- */
-const chocolatePaste = {
-  id: 'choc-paste',
-  name: 'Chocolate Paste',
-  weight: 1300,
-  cost: null,
-  recipe: {
-    id: '1',
-    madeWith: [
-      {
-        id: '1',
-        pos: 0,
-        amt: 1000,
-        qty: 1,
-        ingredient: chocolate //raw ingredient
-      }
-    ]
-  }
-}
+### Data structure sample of a composite ingredient created by other raw ingredients:
+/** <br />
+ \* @param id is unique id of an ingredient <br />
+ \* @param name is the name of the ingredient <br />
+ \* @param weight is the weight, in grams, per unit of ingredient <br />
+ \* @param cost is the total cost in $, per unit of the ingredient. It is null and it's value needs to be determined by calculating the cost of its constituents <br />
+ \* @param recipe refers to the fact that it is a "composite ingredient", not a "raw ingredient" <br />
+ \* @param madeWith refers to the ingredients with which constitutes this recipe, and the respective amounts utillised in the recipe <br />
+ **/ 
+ <br />
+const chocolatePaste = { <br />
+  id: 'choc-paste', <br />
+  name: 'Chocolate Paste', <br />
+  weight: 1300, <br />
+  cost: null, <br />
+  recipe: { <br />
+    id: '1', <br />
+    madeWith: [ <br />
+      { <br />
+        id: '1', <br />
+        pos: 0, <br />
+        amt: 1000, <br />
+        qty: 1, <br />
+        ingredient: chocolate //raw ingredient <br />
+      } <br />
+    ] <br />
+  } <br />
+} <br />
 
-### Sample of data structure of a composite ingredient created by raw ingredients and composite ingredients:
-/**
- * @param id is unique id of an ingredient
- * @param name is the name of the ingredient
- * @param weight is the weight, in grams, per unit of ingredient
- * @param cost is the total cost in $, per unit of the ingredient. It is null and it's value needs to be determined by calculating the cost of its constituents
- * @param recipe refers to the fact that it is a "composite ingredient", not a "raw ingredient"
- * @param madeWith refers to the ingredients with which constitutes this recipe, and the respective amounts utillised in the recipe
+### Data structure sample of a composite ingredient created by raw ingredients and composite ingredients:
+/** <br />
+ \* @param id is unique id of an ingredient  <br />
+ \* @param name is the name of the ingredient  <br />
+ \* @param weight is the weight, in grams, per unit of ingredient  <br />
+ \* @param cost is the total cost in $, per unit of the ingredient. It is null and it's value needs to be determined by calculating the cost of its constituents  <br />
+ \* @param recipe refers to the fact that it is a "composite ingredient", not a "raw ingredient"  <br />
+ \* @param madeWith refers to the ingredients with which constitutes this recipe, and the respective amounts utillised in the recipe  <br />
  */
-const chocolateBatter = {
-  id: 'choc-batter',
-  name: 'Chocolate Batter',
-  weight: 1300,
-  cost: null,
-  recipe: {
-    id: '2',
-    madeWith: [
-      {
-        id: '1',
-        pos: 0,
-        amt: 2000,
-        qty: 1,
-        ingredient: chocolatePaste //composite ingredient
-      },
-      {
-        id: '2',
-        pos: 0,
-        amt: 1000,
-        qty: 1,
-        ingredient: chocolate //raw ingredient
-      }
-    ]
-  }
-}
+  <br />
+const chocolateBatter = {  <br />
+  id: 'choc-batter', <br />
+  name: 'Chocolate Batter', <br />
+  weight: 1300, <br />
+  cost: null, <br />
+  recipe: { <br />
+    id: '2', <br />
+    madeWith: [ <br />
+      { <br />
+        id: '1', <br />
+        pos: 0, <br />
+        amt: 2000, <br />
+        qty: 1, <br />
+        ingredient: chocolatePaste //composite ingredient <br />
+      }, <br />
+      { <br />
+        id: '2', <br />
+        pos: 0, <br />
+        amt: 1000, <br />
+        qty: 1, <br />
+        ingredient: chocolate //raw ingredient <br />
+      } <br />
+    ] <br />
+  } <br />
+} <br />
 
 ### Sample of data structure of a product created by composite ingredients:
-const chocolateCake = {
-  id: "choc-cake",
-	name: "Chocolate Cake",
-	weight: 1400,
-	cost: null,
-	recipe: {
-		id: "1",
-		madeWith: [
-			{
-				id: "1",
-				pos: 0,
-				amt: 1000,
-				qty: 1,
-				ingredient: chocolatePaste //composite ingredient
-			},
-			{
-				id: "2",
-				pos: 0,
-				amt: 1000,
-				qty: 1,
-				ingredient: chocolateBatter //composite ingredient
-			}
-		]
-	}
+const chocolateCake = { <br />
+  id: "choc-cake", <br />
+	name: "Chocolate Cake", <br />
+	weight: 1400, <br />
+	cost: null, <br />
+	recipe: { <br />
+		id: "1", <br />
+		madeWith: [ <br />
+			{ <br />
+				id: "1", <br />
+				pos: 0, <br />
+				amt: 1000, <br />
+				qty: 1, <br />
+				ingredient: chocolatePaste //composite ingredient <br />
+			}, <br />
+			{ <br />
+				id: "2", <br />
+				pos: 0, <br />
+				amt: 1000, <br />
+				qty: 1, <br />
+				ingredient: chocolateBatter //composite ingredient <br />
+			} <br />
+		] <br />
+	} <br />
 }
